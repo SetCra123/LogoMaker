@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const {Triangle, Circle, Square} = require('.lib/shapes.js');
+const {Triangle, Square, Circle} = require("./lib/shapes");
 
 class Svg{
     constructor(){
@@ -19,7 +19,8 @@ class Svg{
 
 }
 
-const userInput = [
+const userInput = ()=> inquirer
+    .prompt ([
     {
         type: "input",
         name: "text",
@@ -42,4 +43,28 @@ const userInput = [
         choices: ("Triangle", "Square", "Circle"),
     },
 
-];
+    
+
+
+])
+
+.then((answers) => {
+    const svgLogoGenerator = Polygon(answers);
+
+    fs.writeFile('logo.svg', svgLogoGenerator, (err) =>
+      err ? console.log(err) : console.log('Successfully created logo.svg!')
+    );
+  });
+
+
+
+  const init = () => {
+    userInput()
+      // Use writeFile method imported from fs.promises to use promises instead of
+      // a callback function
+      .then((answers) => fs.writeFile('logo.svg', svgLogoGenerator(answers)))
+      .then(() => console.log('Successfully created logo.svg'))
+      .catch((err) => console.error(err));
+  };
+  
+  init();
