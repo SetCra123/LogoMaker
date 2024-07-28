@@ -18,3 +18,28 @@ class Svg{
     }
 
 }
+
+const userInput = [
+    {
+        type: "input",
+        name: "text",
+        message: "TEXT: ENter up to (3) Characters:",  
+    },
+    {
+        type: "input",
+        name: "text-color",
+        message: "TEXT COLOR: Enter a color for your text",
+    },
+    {
+        type: "input",
+        name: "shape",
+        message: "SHAPE COLOR: Enter a color for your shape",
+    },
+    {
+        type: "list",
+        name: "shape-image",
+        message: "Choose which Shape you would like?",
+        choices: ("Triangle", "Square", "Circle"),
+    },
+
+];
