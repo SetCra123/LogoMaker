@@ -40,7 +40,7 @@ const userInput = ()=> inquirer
         type: "list",
         name: "shape-image",
         message: "Choose which Shape you would like?",
-        choices: ("Triangle", "Square", "Circle"),
+        choices: ["Triangle", "Square", "Circle"],
     },
 
     
