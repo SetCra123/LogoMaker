@@ -2,24 +2,29 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 const {Triangle, Square, Circle} = require("./lib/shapes");
 
-class Svg{
-    constructor(){
-        this.textElement = ''
-        this.shapeElement = ''
-    }
-    render(){
-        return
-    }
-    setTextElement(text,color){
-        this.textElement = `<text x="150" y="125" font-size="60" text-anchor="middle fill="white">`
-    }       
-    setShapeElement(shape){
-        this.shapeElement = shape.render()
-    }
+const triangle = new Triangle('red');
+const square = new Square('green');
+const circle = new Circle('blue');
 
-}
 
-const userInput = ()=> inquirer
+// class Svg{
+//     constructor(){
+//         this.textElement = ''
+//         this.shapeElement = ''
+//     }
+//     render(){
+//         return
+//     }
+//     setTextElement(text,color){
+//         this.textElement = `<text x="150" y="125" font-size="60" text-anchor="middle fill="white">`
+//     }       
+//     setShapeElement(shape){
+//         this.shapeElement = shape.render()
+//     }
+
+// }
+
+const createSHape = ()=> inquirer
     .prompt ([
     {
         type: "input",
@@ -38,7 +43,7 @@ const userInput = ()=> inquirer
     },
     {
         type: "list",
-        name: "shape-image",
+        name: "shapeImage",
         message: "Choose which Shape you would like?",
         choices: ["Triangle", "Square", "Circle"],
     },
@@ -49,22 +54,42 @@ const userInput = ()=> inquirer
 ])
 
 .then((answers) => {
-    const svgLogoGenerator = Polygon(answers);
+    const svgLogoGenerator = inquirer.prompt(answers);
 
-    fs.writeFile('logo.svg', svgLogoGenerator, (err) =>
+    let shape;
+    switch (answers.shapeType) {
+        case 'Triangle':
+            shape = new Triangle(answers.shapeColor);
+            break;
+        case 'Square':
+            shape = new Square(answers.shapeColor);
+            break;
+        case 'Circle':
+            shape = new Circle(answers.shapeColor);
+            break;
+    }
+
+    
+
+    const svgLogo = `<svg height="300" width="300" xmlns="http://www.w3.org/2000/svg">
+    ${shape.render()}
+    <text x="100" y="100" font-size="40" text-anchor="middle" fill="${answers.textColor}">${answers.text}</text>
+</svg>`
+
+    fs.writeFile('logo.svg', svgLogo, (err) => { 
       err ? console.log(err) : console.log('Successfully created logo.svg!')
-    );
+    });
   });
 
 
-
-  const init = () => {
-    userInput()
-      // Use writeFile method imported from fs.promises to use promises instead of
-      // a callback function
-      .then((answers) => fs.writeFile('logo.svg', svgLogoGenerator(answers)))
-      .then(() => console.log('Successfully created logo.svg'))
-      .catch((err) => console.error(err));
-  };
   
-  init();
+//   const init = () => {
+    createSHape()
+//       // Use writeFile method imported from fs.promises to use promises instead of
+//       // a callback function
+//       .then((answers) => fs.writeFile('logo.svg', svgLogo(answers)))
+//       .then(() => console.log('Successfully created logo.svg'))
+//       .catch((err) => console.error(err));
+//   };
+  
+//   init();
