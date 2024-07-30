@@ -8,4 +8,7 @@ This is an application that will build a simple logo by taking input from CLI. A
 Developers and creators are busy building and creating. They may not have the time or skills to create a logo. This app can quickly create a logo by taking four inputs. The logo is then created instantly and ready for use. 
 
 ## How
-A user can type in node index.js into the terminal and answer questions: Choose three characters, Chose text type, choose shape color and choose shape. Once they have made their choices a logo in file logo.svg wil be created
+A user can type in node index.js into the terminal and answer questions: Choose three characters, Chose text type, choose shape color and choose shape. Once they have made their choices a logo in file logo.svg wil be created.
+
+# User-Video
+<iframe src="https://drive.google.com/file/d/12F1KT1IlBtnfIx91M2ze0z6Pb7c3uc4F/preview" width="640" height="480"></iframe>

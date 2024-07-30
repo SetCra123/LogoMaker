@@ -29,18 +29,18 @@ const createSHape = ()=> inquirer
     {
         type: "input",
         name: "text",
-        message: "TEXT: ENter up to (3) Characters:",  
+        message: "ENter up to (3) Characters:",  
         validate: input => input.length <=3 || 'Please enter up tp three characters'
     },
     {
         type: "input",
         name: "textColor",
-        message: "TEXT COLOR: Enter a color for your text",
+        message: "Enter a color for your text",
     },
     {
         type: "input",
         name: "shapeColor",
-        message: "SHAPE COLOR: Enter a color for your shape",
+        message: "Enter a color for your shape",
     },
     {
         type: "list",
@@ -55,26 +55,26 @@ const createSHape = ()=> inquirer
 ])
 
 .then((answers) => {
-    const svgLogoGenerator = inquirer.prompt(answers);
+    const logoMaker = inquirer.prompt(answers);
 
     let shape;
-    switch (answers.shapeType) {
+    switch (logoMaker.shapeType) {
         case 'Triangle':
-            shape = new Triangle(answers.shapeColor);
+            shape = new Triangle(logoMaker.shapeColor);
             break;
         case 'Square':
-            shape = new Square(answers.shapeColor);
+            shape = new Square(logoMaker.shapeColor);
             break;
         case 'Circle':
-            shape = new Circle(answers.shapeColor);
+            shape = new Circle(logoMaker.shapeColor);
             break;
     }
 
     
 
     const svgLogo = `<svg height="300" width="300" xmlns="http://www.w3.org/2000/svg">
-    ${shape.render()}
-    <text x="100" y="100" font-size="40" text-anchor="middle" fill="${answers.textColor}">${answers.text}</text>
+    ${logoMaker.shapeType}
+    <text x="100" y="100" font-size="40" text-anchor="middle" fill="${logoMaker.textColor}">${logoMaker.text}</text>
 </svg>`;
 
     fs.writeFile('logo.svg', svgLogo, (err) => { 
