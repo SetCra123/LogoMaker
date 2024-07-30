@@ -30,20 +30,21 @@ const createSHape = ()=> inquirer
         type: "input",
         name: "text",
         message: "TEXT: ENter up to (3) Characters:",  
+        validate: input => input.length <=3 || 'Please enter up tp three characters'
     },
     {
         type: "input",
-        name: "text-color",
+        name: "textColor",
         message: "TEXT COLOR: Enter a color for your text",
     },
     {
         type: "input",
-        name: "shape",
+        name: "shapeColor",
         message: "SHAPE COLOR: Enter a color for your shape",
     },
     {
         type: "list",
-        name: "shapeImage",
+        name: "shapeType",
         message: "Choose which Shape you would like?",
         choices: ["Triangle", "Square", "Circle"],
     },
@@ -74,7 +75,7 @@ const createSHape = ()=> inquirer
     const svgLogo = `<svg height="300" width="300" xmlns="http://www.w3.org/2000/svg">
     ${shape.render()}
     <text x="100" y="100" font-size="40" text-anchor="middle" fill="${answers.textColor}">${answers.text}</text>
-</svg>`
+</svg>`;
 
     fs.writeFile('logo.svg', svgLogo, (err) => { 
       err ? console.log(err) : console.log('Successfully created logo.svg!')
